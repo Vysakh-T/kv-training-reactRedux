@@ -1,15 +1,15 @@
-const InputSelect = ({label,options}) => {
+const InputSelect = ({label,options, defaultIndex}) => {
     return ( 
-        <>
+        <div>
         <label>{label}</label><br/>
         <select>
-        <option value="" disabled selected>{options[0]}</option>
         {
-        options.map(element => (<option value={element}>{element}</option>))
+        options.map((element, index) => (<option key={element.key} selected={index === defaultIndex} disabled={index === defaultIndex}>{element.value}</option>))
         }
+        )
         </select>
         <i className="c-down"></i>
-        </>
+        </div>
      );
 }
  

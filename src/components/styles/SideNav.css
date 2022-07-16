@@ -1,0 +1,38 @@
+.logo{
+    background-color: #F9FBFE;
+    padding: 15px 0;
+    display: flex;
+    width: 300px;
+    justify-content: center;
+}
+
+.handle{
+    margin: 20px 0 20px 20px;
+    padding: 15px;
+    background-color: #4aafee;
+    border-radius: 35px 0 0 35px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    color: #FFF;
+}
+
+.handle:hover{
+    cursor: default;
+}
+
+.handle>div{
+    background-color: #FFF;
+    border-radius: 49%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.handle>h6{
+    font-size: 14px;
+    font-weight: 600;
+}

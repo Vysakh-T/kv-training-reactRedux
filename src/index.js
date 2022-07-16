@@ -1,14 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Router, Route } from 'react-router-dom';
+
+
 import './index.css';
+
+
 import App from './App';
+import CreateEmployee from './pages/CreateEmployee';
+import Login from './Login';
+
 import reportWebVitals from './reportWebVitals';
-import CreateEmployee from './CreateEmployee';
+import SideNav from './components/SideNav';
+import Divider from './components/Divider';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <CreateEmployee/>
+    {/* <BrowserRouter>
+    <Router>
+      <Route path="/" element={<Login/>}/>
+      <Route path="/create" element={<CreateEmployee/>}/>
+    </Router>
+    </BrowserRouter> */}
+    <SideNav/>
+    <Divider/>
   </React.StrictMode>
 );
 
