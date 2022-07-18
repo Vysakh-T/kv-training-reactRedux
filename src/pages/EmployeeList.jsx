@@ -5,66 +5,71 @@ import Divider from "../components/Divider";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function EmployeeList() {
-  const data = [
-    { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
-    { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
-    { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
-    { ename: "John Does", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
-    { ename: "John Does", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
-    { ename: "John Does", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
-  ];
+function EmployeeList({data}) {
 
-  const [empDetails,setDetails] = useState(data);
+    const navigate = useNavigate();
 
-  useEffect(()=>{
-    setDetails(data);
-  },[data]);
+    // const data = [
+    //     { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
+    //     { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
+    //     { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
+    //     { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
+    //     { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
+    //     { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
+    // ];
 
-  return (
-    <>
-      <SideNav />
-      <Divider />
-      <main>
-        <section className="title card">
-          <h1>Employee List</h1>
-          <div className="filter">
-            <p>Filter By</p>
-            <span>Status</span>
-          </div>
-          <Button className="btn-action" label="Create Employee" handleClick={() => {}}/>
-        </section>
+    const [empDetails,setDetails] = useState(data);
 
-        <section>
-            <table>
-                <tr className="listheader">
-                    <th>Employee Name</th>
-                    <th>Employee ID</th>
-                    <th>Joining Date</th>
-                    <th>Role</th>
-                    <th>Status</th>
-                    <th>Experience</th>
-                    <th>Action</th>
-                </tr>
-                    {
-                        empDetails.map(item => (
-                            <tr>
-                            <td>{item.ename}</td>
-                            <td>{item.eid}</td>
-                            <td>{item.jdate}</td>
-                            <td>{item.erole}</td>
-                            <td>{item.status}</td>
-                            <td>{item.exp}</td>
-                            <td>Actions</td>
-                            </tr>
-                        ))
-                    }
-            </table>
-        </section>
-      </main>
-    </>
-  );
+    useEffect(()=>{
+        setDetails(data);
+    },[data]);
+
+    return (
+        <>
+        <SideNav />
+        <Divider />
+        <main>
+            <section className="title card">
+            <h1>Employee List</h1>
+            <div className="filter">
+                <p>Filter By</p>
+                <span>Status</span>
+            </div>
+            <Button className="btn-round" label="+" handleClick={() => {navigate('/create')}}/>
+            <span>Create Employee</span>
+            </section>
+
+            <section>
+                <table>
+                    <tr className="listheader">
+                        <th>Employee Name</th>
+                        <th>Employee ID</th>
+                        <th>Joining Date</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Experience</th>
+                        <th>Action</th>
+                    </tr>
+                        {
+                            empDetails.map((item,index) => (
+                                <tr key={index}>
+                                <td>{item.ename}</td>
+                                <td>{item.eid}</td>
+                                <td>{item.jdate}</td>
+                                <td>{item.erole}</td>
+                                <td>{item.status}</td>
+                                <td>{item.exp}</td>
+                                <td>Actions</td>
+                                </tr>
+                            ))
+                        }
+                </table>
+            </section>
+        </main>
+        </>
+    );
 }
 
 export default EmployeeList;

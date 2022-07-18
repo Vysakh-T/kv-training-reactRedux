@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 import './index.css';
@@ -8,21 +8,22 @@ import './index.css';
 
 import App from './App';
 import CreateEmployee from './pages/CreateEmployee';
-import Login from './Login';
+import Login from './pages/Login';
 import EmployeeList from './pages/EmployeeList';
+
+import { store } from './store'
+import { Provider } from 'react-redux'
 
 import reportWebVitals from './reportWebVitals';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  
   <React.StrictMode>
-    <Router>
-      <Route path="/" element={<Login/>}/>
-      <Route path="/create" element={<CreateEmployee/>}/>
-      <Route path="/list" element={<EmployeeList/>}/>
-    </Router>
-    {/* <CreateEmployee/> */}
+    <Provider store={store}>
+    <App/>
+    </Provider>
   </React.StrictMode>
 );
 

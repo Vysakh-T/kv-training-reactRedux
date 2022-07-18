@@ -102,3 +102,7 @@
     right: 15%;
     top: 60%;
 }
+
+.title>h1{
+    padding: 5px 0;
+}

@@ -16,20 +16,27 @@
     width: 140px;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
 }
 
 .btn-primary{
     background-color: #4aafee;
     color: white;
+    padding: 10px 20px;
 }
 
 .btn-secondary{
     border: 1px solid #8a8a8a;
     color: #8a8a8a;
     background-color: #FFF;
+    padding: 10px 20px;
 }
 
-.btn-action{
+.btn-round{
     background-color: #4aafee;
+    border-radius: 50%;
+    width: 58px;
+    height: 58px;
+    padding: 10px;
+    font-size: 32px;
+    color: #FFF;
 }

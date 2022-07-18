@@ -3,44 +3,45 @@ import InputField from './components/InputField';
 import Button from './components/Button';
 import { useEffect, useState } from 'react';
 
+import { Routes,BrowserRouter as Router, Route  } from 'react-router-dom';
+
+import CreateEmployee from './pages/CreateEmployee';
+import EmployeeList from './pages/EmployeeList';
+import Login from './pages/Login';
+import { Counter } from './components/counter';
+
 function App() {
-  // const onClick = () => {
-  //   const value = prompt('Enter your name');
-  //   console.log(value)
-  // };
-  const [userName, setUserName] = useState('');
-  const [displayName, setDisplayName] = useState('');
 
-  const onChange = (value) => {
-    setUserName(value);
-  };
+  const data = [
+    { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", estatus: "Active", exp: "3 Years" },
+    { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", estatus: "Active", exp: "3 Years" },
+    { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", estatus: "Active", exp: "3 Years" },
+    { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", estatus: "Active", exp: "3 Years" },
+    { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", estatus: "Active", exp: "3 Years" },
+    { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", estatus: "Active", exp: "3 Years" },
+];
 
+  const [empData,setState] = useState(data);
 
-    useEffect(()=>{
-      setDisplayName("");
-    },[]);
+  // useEffect(()=>{
+  //   empData = {data}
+  // },[])
 
-    useEffect(()=>{
-      if(!userName){
-      setDisplayName("");
-      }
-      else{
-        setDisplayName(userName);
-      }
-    },[userName]);
+  // useEffect(() => {
+  //   setState(data)
+  // },[data])
 
+  return(
 
-  return (
-    <div className="App">
-      <div>
-      <InputField label="Username" type="text" key="uname" onChange={onChange}></InputField>
-      <InputField label="Password" type="text" key="uname" onChange={onChange}></InputField>
-      <Button label = 'Login' handleClick = {() => {}}></Button>
-      <br/>
-      <br/>
-      <h4>Hello {displayName}</h4>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+      <Route path="/" element={<Login/>}/>
+      <Route path="/counter" element={<Counter/>}/>
+      <Route path="/create" element={<CreateEmployee data = {empData} handleCreate = {setState}/>}/>
+      <Route path="/list" element={<EmployeeList data={empData}/>}/>
+      </Routes>
+    </Router>
+
   );
 }
 
