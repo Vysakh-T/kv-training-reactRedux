@@ -1,5 +1,7 @@
 import "./styles/CreateEmployee.css"
 
+import SideNav from "../components/SideNav";
+import Divider from "../components/Divider";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import InputSelect from "../components/InputSelect";
@@ -16,7 +18,11 @@ function CreateEmployee() {
     ] 
 
     return ( 
+        <>
+        <SideNav/>
+        <Divider/>
         <main>
+
         <section className="title card">
             <h1>Create Employee</h1>
         </section>
@@ -26,9 +32,14 @@ function CreateEmployee() {
             <form name="Ecreate" id="Ecreate" onsubmit="return false" className="form-con">
 
                 {
-                    inputFields.map(item => (<InputField key={item.key} label={item.label} type={item.type}></InputField>))
+                    inputFields.map(item => (
+                    <div className="form-ele">
+                    <InputField key={item.key} label={item.label} type={item.type}></InputField>
+                    </div>
+                    ))
                 }
 
+                <div className="form-ele">
                 <InputSelect label="Role" defaultIndex={0} options={
                     [{key: "def", value: "Choose Role"},
                     {key: "hr", value: "HR"},
@@ -37,21 +48,27 @@ function CreateEmployee() {
                     {key: "devops", value: "DEVOPS"}]
                     }
                     ></InputSelect>
+                </div>
 
+                <div className="form-ele">
                 <InputSelect label="Status" defaultIndex={0} options={
                     [{key: "def", value: "Status"},
                     {key: "active", value: "Active"},
                     {key: "inactive", value: "Inactive"}]
                     }
                     ></InputSelect>
+                </div>
 
+                <div className="form-btns">
                 <Button className = "btn-primary" label="Submit" handleClick = {() => {}}></Button>
                 <Button className = "btn-secondary" label="Cancel" handleClick = {() => {}}></Button>
+                </div>
 
             </form>
         </section>
 
         </main>
+        </>
      );
 }
 

@@ -1,6 +1,6 @@
 const InputSelect = ({label,options, defaultIndex}) => {
     return ( 
-        <div>
+        <>
         <label>{label}</label><br/>
         <select>
         {
@@ -9,7 +9,7 @@ const InputSelect = ({label,options, defaultIndex}) => {
         )
         </select>
         <i className="c-down"></i>
-        </div>
+        </>
      );
 }
  
