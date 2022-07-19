@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useCreateEmployeeMutation, useGetEmployeesQuery } from "../services/employee";
 import ActionButton from "../components/ActionButton";
 
-function EmployeeList({data}) {
+function EmployeeList() {
 
     const navigate = useNavigate();
 
@@ -22,20 +22,39 @@ function EmployeeList({data}) {
     //     { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
     // ];
 
-    const [empDetails,setDetails] = useState(data);
+    const obj = useGetEmployeesQuery();
+
+    const [empDetails,setDetails] = useState([]);
+    const data = obj.data;
+    const isLoading = obj.isLoading;
+    
+
+    if(data){
+    var data1 = data.data.map((item)=>{
+        return {
+            ename: item.name,
+            eid: item.id, 
+            jdate: item.jdate, 
+            erole: item.role, 
+            estatus: item.status.charAt(0).toUpperCase() + item.status.slice(1), 
+            exp: item.experience
+        }
+    })
+}
+
+    useEffect(() => {
+        data1?setDetails(data1):console.log("Empty");
+    }, [obj])
+    
+
+
 
     // const obj = useGetEmployeesQuery();
     // console.log(obj);
 
-
-
-
-    // const obj = useGetEmployeesQuery();
-    // console.log(obj);
-
-    useEffect(()=>{
-        setDetails(data);
-    },[data]);
+    // useEffect(()=>{
+    //     setDetails(data);
+    // },[data]);
 
     return (
         <>
@@ -62,12 +81,12 @@ function EmployeeList({data}) {
                         <h5>Experience</h5>
                         <h5>Action</h5>
                     </div>
-                        {
+                        {   data1?
                             empDetails.map((item,index) => (
                                 <div key={index} className="card listrow">
                                     <p>{item.ename}</p>
-                                    <p>&emsp;&emsp;{item.eid}</p>
-                                    <p>&emsp;&emsp;{item.jdate}</p>
+                                    <p>{item.eid}</p>
+                                    <p>{item.jdate}</p>
                                     <p>{item.erole}</p>
                                     <span className={item.estatus}>{item.estatus}</span>
                                     <p>{item.exp}</p>
@@ -76,7 +95,7 @@ function EmployeeList({data}) {
                                         <i>   &#9998;</i>
                                     </p>
                                 </div>
-                            ))
+                            )):(isLoading?(<h2>Loading...</h2>):(<h2>Error!</h2>))
                         }
                 
             </section>
