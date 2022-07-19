@@ -6,7 +6,7 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCreateEmployeeMutation, useGetEmployeesQuery } from "../services/employee";
+import { useCreateEmployeeMutation, useGetEmployeesQuery,useDeleteEmployeeByIDMutation } from "../services/employee";
 import ActionButton from "../components/ActionButton";
 
 function EmployeeList() {
@@ -29,6 +29,9 @@ function EmployeeList() {
     const isLoading = obj.isLoading;
     
 
+    const[deleteEmployeeByID, result] = useDeleteEmployeeByIDMutation();
+
+
     if(data){
     var data1 = data.data.map((item)=>{
         return {
@@ -47,6 +50,9 @@ function EmployeeList() {
     }, [obj])
     
 
+    const deleteEmp = (id) => {
+        deleteEmployeeByID(id);
+    }
 
 
     // const obj = useGetEmployeesQuery();
@@ -68,7 +74,7 @@ function EmployeeList() {
                 <span>Status <i className="arrow-down"></i></span>
                 
             </div>
-            <ActionButton/>
+            <ActionButton label="+" text="Create Employee" target="/create"/>
             </section>
 
             <section className="table">
@@ -83,7 +89,7 @@ function EmployeeList() {
                     </div>
                         {   data1?
                             empDetails.map((item,index) => (
-                                <div key={index} className="card listrow">
+                                <div key={index} className="card listrow" onClick={() => navigate(`/view/${item.eid}`)}>
                                     <p>{item.ename}</p>
                                     <p>{item.eid}</p>
                                     <p>{item.jdate}</p>
@@ -91,8 +97,8 @@ function EmployeeList() {
                                     <span className={item.estatus}>{item.estatus}</span>
                                     <p>{item.exp}</p>
                                     <p>
-                                        <i>   &#10006;</i> 
-                                        <i>   &#9998;</i>
+                                    <i className="fa-regular fa-trash-can" onClick={() => deleteEmp(item.eid)}></i>
+                                    <i className="fa-regular fa-pen-to-square" onClick={() => navigate(`/edit/${item.eid}`, {replace: true})}></i>
                                     </p>
                                 </div>
                             )):(isLoading?(<h2>Loading...</h2>):(<h2>Error!</h2>))

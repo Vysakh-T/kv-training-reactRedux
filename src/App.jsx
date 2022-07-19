@@ -9,6 +9,8 @@ import CreateEmployee from './pages/CreateEmployee';
 import EmployeeList from './pages/EmployeeList';
 import Login from './pages/Login';
 import { Counter } from './components/counter';
+import EditEmployee from './pages/EditEmployee';
+import DisplayEmployee from './pages/DisplayEmployee';
 
 function App() {
 
@@ -37,8 +39,10 @@ function App() {
       <Routes>
       <Route path="/" element={<Login/>}/>
       <Route path="/counter" element={<Counter/>}/>
-      <Route path="/create" element={<CreateEmployee data = {empData} handleCreate = {setState}/>}/>
-      <Route path="/list" element={<EmployeeList data={empData}/>}/>
+      <Route path="/create" element={<CreateEmployee/>}/>
+      <Route path="/edit/:id" element={<EditEmployee/>}/>
+      <Route path="/view/:id" element={<DisplayEmployee/>}/>
+      <Route path="/list" element={<EmployeeList/>}/>
       </Routes>
     </Router>
 

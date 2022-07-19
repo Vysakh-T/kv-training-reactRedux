@@ -7,18 +7,29 @@ export const employeeApi = createApi({
   endpoints: (builder) => ({
     getEmployees: builder.query({
       query: () => `/employee`,
+      providesTags: ['empDetails'],
     }),
     getEmployeeByID: builder.query({
         query: (id) => `/employee/${id}`,
     }),
     createEmployee: builder.mutation({
         query: (post) => {
-            console.log(post);
             return ({ url: `/employee`, method: 'POST', body: post})},
+        invalidatesTags: ['empDetails'],
     }),
+    deleteEmployeeByID: builder.mutation({
+      query: (id) => {
+          return ({ url: `/employee/${id}`, method: 'DELETE'})},
+      invalidatesTags: ['empDetails'],
+  }),
+    updateEmployeeByID: builder.mutation({
+      query: (id, post) => {
+          return ({ url: `/employee/${id}`, method: 'PUT', body: post})},
+      invalidatesTags: ['empDetails'],
+  }),
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetEmployeesQuery, useGetEmployeeByIDQuery, useCreateEmployeeMutation } = employeeApi
+export const { useGetEmployeesQuery, useGetEmployeeByIDQuery, useCreateEmployeeMutation, useDeleteEmployeeByIDMutation, useUpdateEmployeeByIDMutation } = employeeApi

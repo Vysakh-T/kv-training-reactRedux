@@ -53,9 +53,6 @@
     color: #8a8a8a;
 }
 
-.form-ele>input[type="file"]{
-    display:none;
-}
 
 .custom-file{
     padding: 0 10px 0 20px;
@@ -74,8 +71,25 @@
     transform: translateY(-10px);
 }
 
-/* Buttons */
-.file-btn{
+/* .form-ele>input[type="file"]{
+    display:none;
+} */
+
+#idfile{
+    padding: 0 10px 0 20px;
+    display: block;
+    /* color: #3d3d3d; */
+    color: #8a8a8a;
+    font-weight: 600;
+    font-size: 12px;
+    width: 90%;
+    height:50px;
+    border-radius: 10px;
+    border: 0.5px solid #cecece;
+    background-color: #f5f5f5;
+}
+
+#idfile::after{
     width: 100px;
     border: 1px solid #cecece;
     font-weight: 600;

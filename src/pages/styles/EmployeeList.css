@@ -42,6 +42,7 @@
 }
 
 .listrow, .listheader{
+    cursor: default;
     display: flex;
     height: 60px;
     padding: 30px;
@@ -77,5 +78,17 @@
     background: #F5ECB8;
 }
 
+.listrow>p>i{
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.listrow>p>.fa-trash-can{
+    color: #FA4242;
+}
+
+.listrow>p>.fa-pen-to-square{
+    color: #03AEEE;
+}
 
 

@@ -1,36 +1,45 @@
-import "./styles/CreateEmployee.css"
+import './styles/EditEmployee.css'
 
 import SideNav from "../components/SideNav";
 import Divider from "../components/Divider";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import InputSelect from "../components/InputSelect";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useCreateEmployeeMutation } from "../services/employee";
+import { useGetEmployeeByIDQuery, useUpdateEmployeeByIDMutation } from "../services/employee";
 
-function CreateEmployee() {
+const EditEmployee = () => {
+
+    const{ id } = useParams();
+    console.log(id);
+
+    const {data} = useGetEmployeeByIDQuery(id);
+    if(data){
+    console.log(data.data);
+    }
+
+    if(data){
+    console.log({active: 1,inactive: 2, probation: 3}[data.data.status.toLower()]);
+    }
 
     const navigate = useNavigate();
     const inputFields = [
-        {label: "Employee Name", type: "text", key: "ename"},
-        {label: "Password", type: "text", key: "pword"},
-        {label: "Email ID", type: "email", key: "emailid"},
-        {label: "Joining Date", type: "text", key: "jdate"},
-        {label: "Experience", type: "text", key: "exp"},
-        {label: "Address", type: "text", key: "eadd"},
-        {label: "Upload ID Proof", type: "file", key: "idfile"}
+        {label: "Employee Name", type: "text", key: "ename", value: data.data.name},
+        // {label: "Password", type: "text", key: "pword"},
+        {label: "Email ID", type: "email", key: "emailid", value: data.data.email},
+        {label: "Joining Date", type: "text", key: "jdate", value: data.data.jdate},
+        {label: "Experience", type: "text", key: "exp", value: data.data.experience},
+        {label: "Address", type: "text", key: "eadd", value: data.data.address.desc},
+        // {label: "Upload ID Proof", type: "file", key: "idfile"}
     ] 
 
-    const [CreateEmployee, result] = useCreateEmployeeMutation()
+    const [UpdateEmployeeByID, result] = useUpdateEmployeeByIDMutation()
 
-    // const fSubmit = () => {
-    //     document.getElementById('Ecreate').submit();
-    //     return;
-    // }
 
-    const [formData,setState] = useState({ ename: "", pword: "", emailid:"", jdate: "", erole: "", eadd:"", idfile: "", estatus: "", exp: "" })
+    const [formData,setState] = useState({ ename: data.data.name, emailid: data.data.email, jdate: data.data.jdate, erole: data.data.role, eadd:data.data.address.desc, estatus: data.data.status, exp: data.data.experience })
     const data2 = {...formData};
+    console.log(data2);
 
     const handleChange = (val,key) => {
         data2[key] = val;
@@ -48,21 +57,23 @@ function CreateEmployee() {
             "role": formData.erole,
             "status": formData.estatus,
             "experience": formData.exp,
-            "password": formData.pword,
-            "departmentId": "70b58dc8-fd67-4ccc-b9e5-ac5f2673a8df",
+            "password": data.data.password,
+            "departmentId": data.data.departmentId,
             "address": {
-                "zipcode": "123123",
+                "id": data.data.address.id,
+                "zipcode": data.data.address.zipcode,
                 "desc": formData.eadd
             }
         }
         try {
-            const obj = CreateEmployee(empBody);
-            console.log(obj)
+            const obj1 = UpdateEmployeeByID(id, empBody);
+            console.log(obj1)
         } catch (error) {
             console.log(error);
         }
         navigate('/list');
     }
+
 
     return ( 
         <>
@@ -71,7 +82,7 @@ function CreateEmployee() {
         <main>
 
         <section className="title card">
-            <h1>Create Employee</h1>
+            <h1>Edit Employee</h1>
         </section>
 
         <section className="card">
@@ -81,7 +92,7 @@ function CreateEmployee() {
                 {
                     inputFields.map((item) => (
 
-                    <InputField key = {item.key} id={item.key} label={item.label} type={item.type} handleChange={handleChange}></InputField>
+                    <InputField key = {item.key} id={item.key} label={item.label} type={item.type} handleChange={handleChange} value={item.value}></InputField>
 
                     ))
                 }
@@ -98,7 +109,7 @@ function CreateEmployee() {
                 </div>
 
                 <div className="form-ele">
-                <InputSelect id = 'estatus' key = "estatus" label="Status" defaultIndex={0} handleChange={handleChange} options={
+                <InputSelect id = 'estatus' key = "estatus" label="Status" defaultIndex={{active: 1,inactive: 2, probation: 3}[data.data.status.toLower()]} handleChange={handleChange} options={
                     [{key: "def", value: "Status"},
                     {key: "active", value: "Active"},
                     {key: "inactive", value: "Inactive"},
@@ -119,5 +130,5 @@ function CreateEmployee() {
         </>
      );
 }
-
-export default CreateEmployee;
+ 
+export default EditEmployee;
