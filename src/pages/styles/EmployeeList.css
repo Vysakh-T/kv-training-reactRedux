@@ -47,6 +47,7 @@
     height: 60px;
     padding: 30px;
     padding-right: 120px;
+    text-align: start;
     background: #EAF9FF;
     justify-content: space-between;
     align-items: center;

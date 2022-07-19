@@ -33,10 +33,10 @@ const DisplayEmployee = () => {
         <>   
         <section className="title card">
             <h1>Employee Details</h1>
-            <ActionButton label="&#9998;" text="Edit Employee" target={`/edit/${data.data.id}`}/>
+            <ActionButton label="&#9998;" text="&nbsp;&nbsp;Edit&nbsp;&nbsp;" target={`/edit/${data.data.id}`}/>
         </section>
 
-        <section className="card">
+        <section className="empDetail card">
             <div className='empDetail-ele'>
                 <span>Employee Name</span>
                 <p>{data.data.name}</p>
@@ -57,6 +57,8 @@ const DisplayEmployee = () => {
                 <span>Status</span>
                 <p>{data.data.status}</p>
             </div>
+            <div className='rule'>
+            </div>
             <div className='empDetail-ele'>
                 <span>Experience</span>
                 <p>{data.data.experience}</p>
@@ -67,6 +69,7 @@ const DisplayEmployee = () => {
                 (<p>{data.data.address.desc}, {data.data.address.zipcode} </p>): (<p> </p>)}
             </div>
         </section>
+
         </>):
         (isLoading?(<h3>Loading...</h3>):(<h3>Error!</h3>)) 
         }

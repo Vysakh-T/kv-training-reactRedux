@@ -87,7 +87,7 @@ function CreateEmployee() {
                 }
 
                 <div className="form-ele">
-                <InputSelect id = 'erole' key = "erole" label="Role" defaultIndex={0} handleChange={handleChange} options={
+                <InputSelect id = 'erole' key = "erole" label="Role" defaultIndex={0} disabledIndex={0} handleChange={handleChange} options={
                     [{key: "def", value: "Choose Role"},
                     {key: "hr", value: "HR"},
                     {key: "admin", value: "ADMIN"},
@@ -98,7 +98,7 @@ function CreateEmployee() {
                 </div>
 
                 <div className="form-ele">
-                <InputSelect id = 'estatus' key = "estatus" label="Status" defaultIndex={0} handleChange={handleChange} options={
+                <InputSelect id = 'estatus' key = "estatus" label="Status" defaultIndex={0} disabledIndex={0} handleChange={handleChange} options={
                     [{key: "def", value: "Status"},
                     {key: "active", value: "Active"},
                     {key: "inactive", value: "Inactive"},

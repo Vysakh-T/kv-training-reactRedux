@@ -23,7 +23,9 @@ export const employeeApi = createApi({
       invalidatesTags: ['empDetails'],
   }),
     updateEmployeeByID: builder.mutation({
-      query: (id, post) => {
+      query: ({id, post}) => {
+        console.log('hi')
+          console.log(post)
           return ({ url: `/employee/${id}`, method: 'PUT', body: post})},
       invalidatesTags: ['empDetails'],
   }),
@@ -32,4 +34,4 @@ export const employeeApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetEmployeesQuery, useGetEmployeeByIDQuery, useCreateEmployeeMutation, useDeleteEmployeeByIDMutation, useUpdateEmployeeByIDMutation } = employeeApi
+export const { useGetEmployeesQuery, useGetEmployeeByIDQuery, useCreateEmployeeMutation, useDeleteEmployeeByIDMutation, useUpdateEmployeeByIDMutation,useLazyGetEmployeesQuery } = employeeApi

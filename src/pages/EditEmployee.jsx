@@ -7,50 +7,66 @@ import Button from "../components/Button";
 import InputSelect from "../components/InputSelect";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useGetEmployeeByIDQuery, useUpdateEmployeeByIDMutation } from "../services/employee";
+import { useGetEmployeeByIDQuery, useLazyGetEmployeesQuery, useUpdateEmployeeByIDMutation } from "../services/employee";
 
 const EditEmployee = () => {
 
     const{ id } = useParams();
     console.log(id);
 
-    const {data} = useGetEmployeeByIDQuery(id);
-    if(data){
-    console.log(data.data);
-    }
+    const {data,error,isLoading} = useGetEmployeeByIDQuery(id);
+    (data)?console.log(data.data):console.log("Empty");
 
-    if(data){
-    console.log({active: 1,inactive: 2, probation: 3}[data.data.status.toLower()]);
-    }
+    // if(data){
+    // console.log();
+    // }
 
     const navigate = useNavigate();
     const inputFields = [
-        {label: "Employee Name", type: "text", key: "ename", value: data.data.name},
+        {label: "Employee Name", type: "text", key: "ename"},
         // {label: "Password", type: "text", key: "pword"},
-        {label: "Email ID", type: "email", key: "emailid", value: data.data.email},
-        {label: "Joining Date", type: "text", key: "jdate", value: data.data.jdate},
-        {label: "Experience", type: "text", key: "exp", value: data.data.experience},
-        {label: "Address", type: "text", key: "eadd", value: data.data.address.desc},
+        {label: "Email ID", type: "email", key: "emailid"},
+        {label: "Joining Date", type: "text", key: "jdate"},
+        {label: "Experience", type: "text", key: "exp"},
+        // {label: "Address", type: "text", key: "eadd"},
         // {label: "Upload ID Proof", type: "file", key: "idfile"}
     ] 
+
+    const idMap = {
+        ename: "name",
+        emailid: "email",
+        jdate: "jdate",
+        exp: "experience",
+        eadd: "address"
+    }
 
     const [UpdateEmployeeByID, result] = useUpdateEmployeeByIDMutation()
 
 
-    const [formData,setState] = useState({ ename: data.data.name, emailid: data.data.email, jdate: data.data.jdate, erole: data.data.role, eadd:data.data.address.desc, estatus: data.data.status, exp: data.data.experience })
-    const data2 = {...formData};
-    console.log(data2);
+    const [formData,setState] = useState({})
+    // { ename: data.data.name, emailid: data.data.email, jdate: data.data.jdate, erole: data.data.role, eadd:data.data.address.desc, estatus: data.data.status, exp: data.data.experience }
+    
+    // console.log(data2);
 
     const handleChange = (val,key) => {
+        setState({ ename: data.data.name, emailid: data.data.email, jdate: data.data.jdate, erole: data.data.role, eadd:data.data.address.desc, estatus: data.data.status, exp: data.data.experience });
+        const data2 = {...formData};
         data2[key] = val;
         setState(data2);
         console.log(formData);
       }
+
+    useEffect(() => {
+        if(data){
+            setState({ ename: data.data.name, emailid: data.data.email, jdate: data.data.jdate, erole: data.data.role, eadd:data.data.address.desc, estatus: data.data.status, exp: data.data.experience });
+        }
+    },[data])
     
 
     const submitHandler = (event) => {
         event.preventDefault();
-        const empBody = {
+        const post = {
+            "id" : data.data.id,
             "name": formData.ename,
             "jdate": formData.jdate,
             "email": formData.emailid,
@@ -60,14 +76,15 @@ const EditEmployee = () => {
             "password": data.data.password,
             "departmentId": data.data.departmentId,
             "address": {
-                "id": data.data.address.id,
-                "zipcode": data.data.address.zipcode,
-                "desc": formData.eadd
+                "id": data.data.address?data.data.address.id:null,
+                "zipcode": data.data.address?data.data.address.zipcode:null,
+                "desc": data.data.address?data.data.address.desc:null
             }
         }
         try {
-            const obj1 = UpdateEmployeeByID(id, empBody);
-            console.log(obj1)
+            console.log('hello')
+            // console.log(empBody)
+            UpdateEmployeeByID({id, post});
         } catch (error) {
             console.log(error);
         }
@@ -86,19 +103,20 @@ const EditEmployee = () => {
         </section>
 
         <section className="card">
-
+            {
+            (data)?(
             <form name="Ecreate" id="Ecreate" onSubmit={submitHandler} className="form-con">
 
                 {
                     inputFields.map((item) => (
 
-                    <InputField key = {item.key} id={item.key} label={item.label} type={item.type} handleChange={handleChange} value={item.value}></InputField>
+                    <InputField key = {item.key} id={item.key} label={item.label} type={item.type} value ={data.data[idMap[item.key]]} handleChange={handleChange}></InputField>
 
                     ))
                 }
 
                 <div className="form-ele">
-                <InputSelect id = 'erole' key = "erole" label="Role" defaultIndex={0} handleChange={handleChange} options={
+                <InputSelect id = 'erole' key = "erole" label="Role" defaultIndex={{HR: 1,ADMIN: 2, DEV: 3, DEVOPS:4}[data.data.role]} disabledIndex={0} handleChange={handleChange} options={
                     [{key: "def", value: "Choose Role"},
                     {key: "hr", value: "HR"},
                     {key: "admin", value: "ADMIN"},
@@ -109,7 +127,7 @@ const EditEmployee = () => {
                 </div>
 
                 <div className="form-ele">
-                <InputSelect id = 'estatus' key = "estatus" label="Status" defaultIndex={{active: 1,inactive: 2, probation: 3}[data.data.status.toLower()]} handleChange={handleChange} options={
+                <InputSelect id = 'estatus' key = "estatus" label="Status" defaultIndex={{active: 1,inactive: 2, probation: 3}[data.data.status]} disabledIndex={0} handleChange={handleChange} options={
                     [{key: "def", value: "Status"},
                     {key: "active", value: "Active"},
                     {key: "inactive", value: "Inactive"},
@@ -123,7 +141,8 @@ const EditEmployee = () => {
                 <Button className = "btn-secondary" label="Cancel" handleClick = {() => {navigate('/list')}}></Button>
                 </div>
 
-            </form>
+            </form>):(isLoading?(<h3>Loading...</h3>):(<h3>Error</h3>))
+            }   
         </section>
 
         </main>

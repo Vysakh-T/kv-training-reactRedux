@@ -97,8 +97,8 @@ function EmployeeList() {
                                     <span className={item.estatus}>{item.estatus}</span>
                                     <p>{item.exp}</p>
                                     <p>
-                                    <i className="fa-regular fa-trash-can" onClick={() => deleteEmp(item.eid)}></i>
-                                    <i className="fa-regular fa-pen-to-square" onClick={() => navigate(`/edit/${item.eid}`, {replace: true})}></i>
+                                    <i className="fa-regular fa-trash-can" onClick={(e) => {e.stopPropagation(); deleteEmp(item.eid)}}></i>
+                                    <i className="fa-regular fa-pen-to-square" onClick={(e) => {e.stopPropagation(); navigate(`/edit/${item.eid}`, {replace: true})}}></i>
                                     </p>
                                 </div>
                             )):(isLoading?(<h2>Loading...</h2>):(<h2>Error!</h2>))

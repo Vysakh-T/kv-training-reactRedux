@@ -1,0 +1,28 @@
+.empDetail{
+    width:85%;
+    display: flex;
+    flex-wrap: wrap;
+    /* gap: 30px; */
+}
+
+.empDetail-ele{
+    margin: 20px 0;
+    width: calc(100%/5);
+    font-size: 16px;
+}
+
+.empDetail-ele>span{
+    display: block;
+    color: #8B8D9D;
+    margin-bottom: 10px;
+}
+.empDetail-ele>p{
+    display: block;
+}
+
+.rule{
+    width: 95%;
+    height: 1px;
+    background: #8B8D9D;
+    opacity: 0.3;
+}
