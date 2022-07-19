@@ -26,24 +26,27 @@ function CreateEmployee({data, handleCreate}) {
     //     return;
     // }
 
-    const [formData,setState] = useState({ ename: "", eid: "", emailid:"", jdate: "", erole: "", eadd:"", idfile: "", status: "", exp: "" })
+    const [formData,setState] = useState({ ename: "", eid: "", emailid:"", jdate: "", erole: "", eadd:"", idfile: "", estatus: "", exp: "" })
     const data2 = {...formData};
 
     const handleChange = (val,key) => {
-        console.log(val,key);
+        // console.log(val,key);
         const fdata = {...data2}
         fdata[key] = val;
         setState(fdata);
-        console.log(data2);
+        // console.log(data2);
       }
     
 
     const submitHandler = (event) => {
         event.preventDefault();
         const data1 = [...data];
+        // console.log(data1);
         data1.push(data2);
         // console.log(data1);
         handleCreate(data1);
+        alert(`Created Employee ${data2.ename}`);
+        navigate('/list');
     }
 
     return ( 
@@ -69,7 +72,7 @@ function CreateEmployee({data, handleCreate}) {
                 }
 
                 <div className="form-ele">
-                <InputSelect key = "erole" label="Role" defaultIndex={0} options={
+                <InputSelect id = 'erole' key = "erole" label="Role" defaultIndex={0} handleChange={handleChange} options={
                     [{key: "def", value: "Choose Role"},
                     {key: "hr", value: "HR"},
                     {key: "admin", value: "ADMIN"},
@@ -80,7 +83,7 @@ function CreateEmployee({data, handleCreate}) {
                 </div>
 
                 <div className="form-ele">
-                <InputSelect key = "estatus" label="Status" defaultIndex={0} options={
+                <InputSelect id = 'estatus' key = "estatus" label="Status" defaultIndex={0} handleChange={handleChange} options={
                     [{key: "def", value: "Status"},
                     {key: "active", value: "Active"},
                     {key: "inactive", value: "Inactive"},

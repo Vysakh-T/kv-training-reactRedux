@@ -2,10 +2,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0;
+    padding: 30px 30px;
 }
 
 .title>h1{
-    margin-right: 60%;
+    margin-right: 55%;
 }
 
 .title>.filter{
@@ -13,10 +15,67 @@
     gap: 20px;
     justify-content: space-between;
     align-items: center;
+    font-size: 16px;
 }
 
 .title>.filter>span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     background: #EAF9FF;
-    padding: 10px;
+    padding: 10px 30px;
     border-radius: 50px;
 }
+
+.filter>span>.arrow-down{
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+}
+
+.table{
+    width: 100%;
+    text-align: left;
+}
+
+.listrow, .listheader{
+    display: flex;
+    height: 60px;
+    padding: 30px;
+    padding-right: 120px;
+    background: #EAF9FF;
+    justify-content: space-between;
+    align-items: center;
+    /* background: red; */
+}
+
+.listrow{
+    background: #FFF;
+    font-size: 16px;
+    box-shadow: 0px 3px 6px #9D9D9D29;
+}
+
+.listrow>span{
+    padding: 5px 30px;
+    border-radius: 50px;
+    background: purple;
+}
+
+.listrow>.Active{
+    background: #D3F4BE;
+}
+
+.listrow>.Inactive{
+    background:#FFBFBF;
+
+}
+
+.listrow>.Probation{
+    background: #F5ECB8;
+}
+
+
+

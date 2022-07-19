@@ -1,8 +1,8 @@
-const InputSelect = ({label,options, defaultIndex}) => {
+const InputSelect = ({id, label,options, defaultIndex, handleChange}) => {
     return ( 
         <>
-        <label>{label}</label><br/>
-        <select>
+        <label htmlFor={id}>{label}</label><br/>
+        <select id={id} onChange={(e) => handleChange(e.target.value,id)}>
         {
         options.map((element, index) => (<option key={element.key} selected={index === defaultIndex} disabled={index === defaultIndex}>{element.value}</option>))
         }

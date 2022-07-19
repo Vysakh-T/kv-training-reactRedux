@@ -6,6 +6,8 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCreateEmployeeMutation, useGetEmployeesQuery } from "../services/employee";
+import ActionButton from "../components/ActionButton";
 
 function EmployeeList({data}) {
 
@@ -22,6 +24,15 @@ function EmployeeList({data}) {
 
     const [empDetails,setDetails] = useState(data);
 
+    // const obj = useGetEmployeesQuery();
+    // console.log(obj);
+
+
+
+
+    // const obj = useGetEmployeesQuery();
+    // console.log(obj);
+
     useEffect(()=>{
         setDetails(data);
     },[data]);
@@ -35,37 +46,39 @@ function EmployeeList({data}) {
             <h1>Employee List</h1>
             <div className="filter">
                 <p>Filter By</p>
-                <span>Status</span>
+                <span>Status <i className="arrow-down"></i></span>
+                
             </div>
-            <Button className="btn-round" label="+" handleClick={() => {navigate('/create')}}/>
-            <span>Create Employee</span>
+            <ActionButton/>
             </section>
 
-            <section>
-                <table>
-                    <tr className="listheader">
-                        <th>Employee Name</th>
-                        <th>Employee ID</th>
-                        <th>Joining Date</th>
-                        <th>Role</th>
-                        <th>Status</th>
-                        <th>Experience</th>
-                        <th>Action</th>
-                    </tr>
+            <section className="table">
+                    <div className="listheader">
+                        <h5>Employee Name</h5>
+                        <h5>Employee ID</h5>
+                        <h5>Joining Date</h5>
+                        <h5>Role</h5>
+                        <h5>Status</h5>
+                        <h5>Experience</h5>
+                        <h5>Action</h5>
+                    </div>
                         {
                             empDetails.map((item,index) => (
-                                <tr key={index}>
-                                <td>{item.ename}</td>
-                                <td>{item.eid}</td>
-                                <td>{item.jdate}</td>
-                                <td>{item.erole}</td>
-                                <td>{item.status}</td>
-                                <td>{item.exp}</td>
-                                <td>Actions</td>
-                                </tr>
+                                <div key={index} className="card listrow">
+                                    <p>{item.ename}</p>
+                                    <p>&emsp;&emsp;{item.eid}</p>
+                                    <p>&emsp;&emsp;{item.jdate}</p>
+                                    <p>{item.erole}</p>
+                                    <span className={item.estatus}>{item.estatus}</span>
+                                    <p>{item.exp}</p>
+                                    <p>
+                                        <i>   &#10006;</i> 
+                                        <i>   &#9998;</i>
+                                    </p>
+                                </div>
                             ))
                         }
-                </table>
+                
             </section>
         </main>
         </>
