@@ -9,10 +9,13 @@ import { useNavigate } from "react-router-dom";
 import { useCreateEmployeeMutation, useGetEmployeesQuery,useDeleteEmployeeByIDMutation } from "../services/employee";
 import ActionButton from "../components/ActionButton";
 import InputSelect from "../components/InputSelect";
+import ModalPopup from "../components/ModalPopup";
 
 function EmployeeList() {
 
     const navigate = useNavigate();
+
+    const [popupToggle,setToggle] = useState();
 
     // const data = [
     //     { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
@@ -22,6 +25,10 @@ function EmployeeList() {
     //     { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
     //     { ename: "John Doe", eid: "1234", jdate: "12/12/2012", erole: "DEV", status: "Active", exp: "3 Years" },
     // ];
+
+    useEffect(() => {
+        setToggle(false);
+    },[])
 
     const obj = useGetEmployeesQuery();
 
@@ -68,6 +75,10 @@ function EmployeeList() {
         <SideNav />
         <Divider />
         <main>
+            {
+            popupToggle && 
+            (<ModalPopup toggle={popupToggle} setToggle={setToggle} title="Are you sure ?" subtitle="Do you really want to delete employee ?"/>)
+            }
             <section className="title card">
             <h1>Employee List</h1>
             <div className="filter">
@@ -103,10 +114,13 @@ function EmployeeList() {
                                     <p>{item.eid}</p>
                                     <p>{item.jdate}</p>
                                     <p>{item.erole}</p>
-                                    <span className={item.estatus}>{item.estatus}</span>
-                                    <p>{item.exp}</p>
                                     <p>
-                                    <i className="fa-regular fa-trash-can" onClick={(e) => {e.stopPropagation(); deleteEmp(item.eid)}}></i>
+                                    <span className={item.estatus}>{item.estatus}</span>
+                                    </p>
+                                    <p>{item.exp}</p>
+                                    {/* deleteEmp(item.eid) */}
+                                    <p>
+                                    <i className="fa-regular fa-trash-can" onClick={(e) => {e.stopPropagation(); setToggle(true);}}></i>
                                     <i className="fa-regular fa-pen-to-square" onClick={(e) => {e.stopPropagation(); navigate(`/edit/${item.eid}`, {replace: true})}}></i>
                                     </p>
                                 </div>

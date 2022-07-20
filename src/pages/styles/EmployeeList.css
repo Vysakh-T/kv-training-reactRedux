@@ -87,13 +87,18 @@
     display: flex;
     height: 60px;
     padding: 30px;
-    padding-right: 120px;
-    text-align: start;
+    padding-right: 60px;
+    text-align: left;
     background: #EAF9FF;
-    justify-content: space-between;
     align-items: center;
     /* background: red; */
 }
+
+.listrow>*, .listheader>*{
+    width: calc(100% / 4);
+    margin-right: 30px;
+}
+
 
 .listrow{
     background: #FFF;
@@ -101,22 +106,22 @@
     box-shadow: 0px 3px 6px #9D9D9D29;
 }
 
-.listrow>span{
+.listrow>p>span{
     padding: 5px 30px;
     border-radius: 50px;
     background: purple;
 }
 
-.listrow>.Active{
+.listrowp>p>.Active{
     background: #D3F4BE;
 }
 
-.listrow>.Inactive{
+.listrow>p>.Inactive{
     background:#FFBFBF;
 
 }
 
-.listrow>.Probation{
+.listrow>p>.Probation{
     background: #F5ECB8;
 }
 
