@@ -45,11 +45,61 @@
     margin: 0;
     padding: 0;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .container>.form-ele>label{
-    display: none;
+    padding: 0 3px;
+    position: absolute;
+    left: 20px;
+    top: 5px;
+    font-size: 12px;
+    font-weight: 200;
+    background: #FFF;
+    color: #1EB4F0;
+    /* visibility: hidden; */
 }
+
+.container>.form-ele>input{
+    background: #FFF;
+    /* border: 0px solid #1EB4F0; */
+}
+
+/* .container>.form-ele>label{
+
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: calc(1px * 0.75) calc(1px * .5);
+      margin: calc(1px * 0.75 + 3px) calc(1px * .5);
+      background: pink;
+      white-space: nowrap;
+      transform: translate(0, 0);
+      transform-origin: 0 0;
+      background: #FFF;
+      transition: transform 120ms ease-in;
+      font-weight: bold;
+      line-height: 1.2;
+
+    }
+
+.container>.form-ele>input{
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+      border: 3px solid grey;
+      padding: calc(1px * 1.5) 1px;
+      color: grey;
+      background: transparent;
+      border-radius: var(5px);
+}
+
+.container>.form-ele>input:focus {
+          transform: translate(.25rem, -65%) scale(.8);
+          color: #1EB4F0;
+        }
+       */
+
 
 .container>.btn-primary{
     margin-top: 20px;
@@ -57,7 +107,13 @@
     height: 40px;
 }
 
+
 .container>.form-ele>input:focus{
+    outline: none;
     border: #1EB4F0 1px solid;
     cursor: line;
+}
+
+.container>.form-ele>input:focus::placeholder{
+    visibility: hidden;
 }
