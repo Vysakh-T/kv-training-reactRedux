@@ -33,8 +33,8 @@ function Login() {
         <section className="right">
         <div className="container">
         <img src={CompanyLogo} alt="KeyValue Logo"/>
-        <InputField label="Username" type="text" key="uname" id="uname" onChange={() => {}} toggleLabel={true}></InputField>
-        <InputField label="Password" type="text" key="pword" id="pword" onChange={() => {}} toggleLabel={true}></InputField>
+        <InputField label="Username" type="text" id="uname" onChange={() => {}} toggleLabel={true}></InputField>
+        <InputField label="Password" type="text" id="pword" onChange={() => {}} toggleLabel={true}></InputField>
         <Button className = "btn-primary" label="Log In" handleClick = {()=> {navigate('/list')}}></Button>
         </div>
         </section>

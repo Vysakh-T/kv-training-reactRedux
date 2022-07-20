@@ -58,7 +58,7 @@
     background: #FFF;
     color: #1EB4F0;
     transition: all 0s ease-in-out;
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
 .container>.form-ele>input{
