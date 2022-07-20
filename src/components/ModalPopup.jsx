@@ -13,7 +13,7 @@ const ModalPopup = (props) => {
                 <p className='modal-title'>{props.title}</p>
                 <p className='modal-subtitle'>{props.subtitle}</p>
                 <div className='modal-buttons'>
-                <Button className = "btn-primary" label="Confirm" handleClick = {()=> {props.setToggle(false)}}></Button>
+                <Button className = "btn-primary" label="Confirm" handleClick = {()=> {props.setToggle(false); props.clickFunc(props.clickedID)}}></Button>
                 <Button className = "btn-secondary" label="Cancel" handleClick = {() => {props.setToggle(false)}}></Button>
                 </div>
             </div>

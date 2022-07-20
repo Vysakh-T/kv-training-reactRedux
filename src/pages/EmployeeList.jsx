@@ -39,6 +39,8 @@ function EmployeeList() {
 
     const[deleteEmployeeByID, result] = useDeleteEmployeeByIDMutation();
 
+    const [clickedID,setClickedID] = useState();
+
 
     if(data){
     var data1 = data.data.map((item)=>{
@@ -77,7 +79,7 @@ function EmployeeList() {
         <main>
             {
             popupToggle && 
-            (<ModalPopup toggle={popupToggle} setToggle={setToggle} title="Are you sure ?" subtitle="Do you really want to delete employee ?"/>)
+            (<ModalPopup toggle={popupToggle} setToggle={setToggle} title="Are you sure ?" subtitle="Do you really want to delete employee ?" clickFunc={deleteEmployeeByID} clickedID={clickedID}/>)
             }
             <section className="title card">
             <h1>Employee List</h1>
@@ -120,7 +122,7 @@ function EmployeeList() {
                                     <p>{item.exp}</p>
                                     {/* deleteEmp(item.eid) */}
                                     <p>
-                                    <i className="fa-regular fa-trash-can" onClick={(e) => {e.stopPropagation(); setToggle(true);}}></i>
+                                    <i className="fa-regular fa-trash-can" onClick={(e) => {e.stopPropagation(); setToggle(true); setClickedID(item.eid)}}></i>
                                     <i className="fa-regular fa-pen-to-square" onClick={(e) => {e.stopPropagation(); navigate(`/edit/${item.eid}`, {replace: true})}}></i>
                                     </p>
                                 </div>
