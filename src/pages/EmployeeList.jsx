@@ -119,7 +119,7 @@ function EmployeeList() {
                                     <p>
                                     <span className={item.estatus}>{item.estatus}</span>
                                     </p>
-                                    <p>{item.exp}</p>
+                                    <p>{item.exp} Years</p>
                                     {/* deleteEmp(item.eid) */}
                                     <p>
                                     <i className="fa-regular fa-trash-can" onClick={(e) => {e.stopPropagation(); setToggle(true); setClickedID(item.eid)}}></i>
