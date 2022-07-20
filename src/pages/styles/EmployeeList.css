@@ -18,7 +18,7 @@
     font-size: 16px;
 }
 
-.title>.filter>span{
+/* .title>.filter>span{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,6 +34,47 @@
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 5px solid black;
+} */
+
+.filter>span{
+    position: relative;
+    transform: translateY(-8px);
+}
+
+.filter>span>.arrow-down{
+    position: absolute;
+    right: 20%;
+    top: 65%;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+}
+
+.filter>span>.c-down{
+    display: none;
+}
+
+.title>.filter>span>label{
+    display: none;
+}
+
+.title>.filter>span>select{
+    /* text-align: left; */
+    background: #EAF9FF;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    padding: 5px 40px 5px 15px;
+    height: 30px;
+    border-radius: 50px;
+    outline: none;
+    color: #000 !important;
+    font-weight: normal;
+    font-size: 14px;
 }
 
 .table{

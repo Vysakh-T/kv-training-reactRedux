@@ -20,6 +20,28 @@
     display: block;
 }
 
+.empDetail-ele>.Active,
+.empDetail-ele>.Inactive,
+.empDetail-ele>.Probation{
+    padding: 5px 20px;
+    border-radius: 50px;
+    width: fit-content;
+    font-size: 14px;
+}
+
+.empDetail-ele>.Active{
+    background: #D3F4BE;
+}
+
+.empDetail-ele>.Inactive{
+    background:#FFBFBF;
+
+}
+
+.empDetail-ele>.Probation{
+    background: #F5ECB8;
+}
+
 .rule{
     width: 95%;
     height: 1px;

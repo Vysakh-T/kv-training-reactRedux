@@ -55,7 +55,7 @@ const DisplayEmployee = () => {
             </div>
             <div className='empDetail-ele'>
                 <span>Status</span>
-                <p>{data.data.status}</p>
+                <p className={data.data.status}>{data.data.status}</p>
             </div>
             <div className='rule'>
             </div>

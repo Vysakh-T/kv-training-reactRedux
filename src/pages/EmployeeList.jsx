@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateEmployeeMutation, useGetEmployeesQuery,useDeleteEmployeeByIDMutation } from "../services/employee";
 import ActionButton from "../components/ActionButton";
+import InputSelect from "../components/InputSelect";
 
 function EmployeeList() {
 
@@ -71,8 +72,16 @@ function EmployeeList() {
             <h1>Employee List</h1>
             <div className="filter">
                 <p>Filter By</p>
-                <span>Status <i className="arrow-down"></i></span>
-                
+                {/* <span>Status <i className="arrow-down"></i></span> */}
+                <span>
+                <InputSelect id = 'estatus' key = "estatus" label="Status" defaultIndex={0} handleChange={() => {}} options={
+                    [{key: "def", value: "None"},
+                    {key: "status", value: "Status"},
+                    {key: "role", value: "Role"}]
+                    }
+                    ></InputSelect>
+                <i className="arrow-down"></i>
+                </span>
             </div>
             <ActionButton label="+" text="Create Employee" target="/create"/>
             </section>
